@@ -97,13 +97,13 @@
 
     Split(['.prompt', '#scratchpad'], {
       gutterSize: 5,
-      sizes: [50, 50],
+      sizes: [70, 30],
       direction: "vertical"
     })
 
     Split(['.editor_layout', '.output_layout'], {
       gutterSize: 5,
-      sizes: [50, 50],
+      sizes: [70, 30],
       direction: "vertical"
     })
   </script>
@@ -118,6 +118,10 @@
     .gutter {
       height: 100%;
       background: rgb(30, 25, 62);
+    }
+
+    .gutter:hover{
+      background-color: blueviolet;
     }
 
     .gutter-horizontal {
