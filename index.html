@@ -74,7 +74,13 @@
         </div>
         <div id="scratchpad" style="height: 100%;">this is the scratchpad</div>
       </div>
-      <div class="s2" style="background-color: green; height: 100%;">
+      <div class="s2" style="background-color: #333; height: 100%;">
+        <div class="editor_layout" style="height: 100%;">
+          <div id="code_editor" style="height: 100%">This is where you write code</div>
+        </div>
+        <div class="output_layout">
+          This is where you give custom inputs :)
+        </div>
       </div>
     </div>
   </div>
@@ -86,12 +92,18 @@
   <script>
     Split(['.s1', '.s2'], {
       gutterSize: 4,
-      sizes: [50, 50]
+      sizes: [40, 60]
     })
 
-    Split(['.prompt', '#scratchpad'],{
+    Split(['.prompt', '#scratchpad'], {
       gutterSize: 5,
-      sizes: [50,50],
+      sizes: [50, 50],
+      direction: "vertical"
+    })
+
+    Split(['.editor_layout', '.output_layout'], {
+      gutterSize: 5,
+      sizes: [50, 50],
       direction: "vertical"
     })
   </script>
@@ -108,14 +120,13 @@
       background: rgb(30, 25, 62);
     }
 
-    .gutter-horizontal{
+    .gutter-horizontal {
       cursor: w-resize;
     }
 
-    .gutter-vertical{
+    .gutter-vertical {
       cursor: s-resize;
     }
-
   </style>
 
   <script src="ace/ace.js"></script>
@@ -123,6 +134,13 @@
   <script>
     scratchpad = ace.edit("scratchpad")
     scratchpad.setTheme("ace/theme/monokai");
+    scratchpad.setOptions({
+      fontSize: 18
+    })
+
+
+    code_editor = ace.edit("code_editor")
+    code_editor.setTheme("ace/theme/monokai")
     scratchpad.setOptions({
       fontSize: 18
     })
