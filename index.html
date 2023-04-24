@@ -54,10 +54,10 @@
 
   <div class="nav">
     <label style="margin-left: 20px; margin-right: 10px;">font size: </label>
-    <select class="btn btn-sm" style="background-color: #181120">
+    <select id="font_bx" class="btn btn-sm" style="background-color: #181120" onchange="setFontSize()">
       <option value="1">0.5x</option>
       <option value="0.75">0.75x</option>
-      <option value="1">1x</option>
+      <option value="1" selected>1x</option>
       <option value="1.25">1.25x</option>
       <option value="1.5">1.5x</option>
       <option value="2">2x</option>
@@ -65,10 +65,10 @@
 
 
     <label style="margin-left: 20px; margin-right: 10px;">Language: </label>
-    <select class="btn btn-sm" style="background-color: #181120">
-      <option value="python">python</option>
-      <option value="javascript">javascript</option>
-      <option value="java">java</option>
+    <select id="language_bx" class="btn btn-sm" style="background-color: #181120" onchange="setLanguage()">
+      <option value="ace/mode/python" selected>python</option>
+      <option value="ace/mode/javascript">javascript</option>
+      <option value="ace/mode/java">java</option>
     </select>
   </div>
 
@@ -168,6 +168,31 @@
     scratchpad.setOptions({
       fontSize: 18
     })
+
+    var languageBox = document.getElementById("language_bx")
+    var fontBox = document.getElementById("font_bx")
+
+    function setLanguage() {
+      var selectedValue = languageBox.options[languageBox.selectedIndex].value
+      code_editor.session.setMode(selectedValue)
+    }
+    
+    function setFontSize(){
+      var selectedValue = fontBox.options[fontBox.selectedIndex].value
+      code_editor.setOptions({
+        fontSize: "22" * selectedValue
+      })
+      scratchpad.setOptions({
+        fontSize: "22" * selectedValue
+      })
+    }
+
+    window.onload = ()=>{
+      code_editor.session.setMode("ace/mode/python")
+      setFontSize()
+      setLanguage()
+    }
+
   </script>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
