@@ -60,8 +60,9 @@
   <div class="nav">
 
     <label style="margin-left: 20px; margin-right: 10px;">font size:</label>
+
     <select id="font_bx" class="btn btn-sm" style="background-color: #181120" onchange="setFontSize()">
-      <option value="1">0.5x</option>
+      <option value="0.5">0.5x</option>
       <option value="0.75">0.75x</option>
       <option value="1" selected>1x</option>
       <option value="1.25">1.25x</option>
@@ -85,6 +86,17 @@
       <option value="ace/mode/javascript">javascript</option>
       <option value="ace/mode/java">java</option>
     </select>
+
+    <label style="margin-left: 20px; margin-right: 10px;">Theme: </label>
+    <select id="theme_bx" class="btn btn-sm" style="background-color: #181120" onchange="setTheme()">
+      <option value="ace/theme/monokai">monokai</option>
+      <option value="ace/theme/chrome">chrome</option>
+      <option value="ace/theme/ambiance">ambiance</option>
+      <option value="ace/theme/github">github</option>
+      <option value="ace/theme/dracula">dracula</option>
+      <option value="ace/theme/xcode">xcode</option>
+    </select>
+
   </div>
 
   <div>
@@ -187,6 +199,7 @@
     var languageBox = document.getElementById("language_bx")
     var fontBox = document.getElementById("font_bx")
     var fontStyleBox = document.getElementById("font_style_bx")
+    var themeBox = document.getElementById("theme_bx")
 
     function setLanguage() {
       var selectedValue = languageBox.options[languageBox.selectedIndex].value
@@ -198,11 +211,8 @@
       code_editor.setOptions({
         fontSize: "22" * selectedValue
       })
-      scratchpad.setOptions({
-        fontSize: "22" * selectedValue
-      })
-    }
 
+    }
 
     function setFont() {
       var selectedValue = fontStyleBox.options[fontStyleBox.selectedIndex].value
@@ -211,7 +221,11 @@
           fontFamily: selectedValue
         }
       )
+    }
 
+    function setTheme() {
+      var selectedValue = themeBox.options[themeBox.selectedIndex].value
+      code_editor.setTheme(selectedValue)
     }
 
     window.onload = () => {
